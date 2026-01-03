@@ -1,0 +1,76 @@
+# Tekoi - Offline Digital Credit
+
+**Current date:** January 02, 2026  
+**Version:** 1.1 (full suite)  
+**Platform:** Linux Mint 19 32-bit (Python 3.6.9)  
+**Status:** Not publicly launched – private, person-to-person only
+
+## What is Tekoi?
+
+Tekoi is an **offline digital credit**.  
+No internet. No cables. No WiFi. No blockchain. No banks. No politicians deciding the value of your time.
+
+The days of the value of a human life's time on this world being defined by a politician or a leader, nor any man but all is coming to a halt (hopefully for good) quick.
+
+Tekoi believes in Humanity. People. Man and Woman.  
+We were meant to live like a slave for the master? No.  
+WE WERE MADE FOR LIFE. LOVE. SADNESS. HAPPINESS. LONELINESS. TOGETHERNESS.  
+A lot of ness. (not canttendo)
+
+Welcome to Tekoi.  
+The new credit for US. The Equalizer for them.
+
+## - - - tekoi is not launched - - -
+
+If you would like to reserve an account please message me (tator) and I'd be glad to assist.
+
+## - - - How Will The People Make Money - - -
+
+Simple. Get rid of the idea that we need to have the "value" tied to a worthless reputation of a political power or a rock and put it in the future of humanity including Earth and all of her creatures.
+
+## - - - Where the tekoi from - - -
+
+The main Account I hold will hold an enormous amount of tekoi for future depositing for first time users. Encrypted and offline.
+
+## - - - SECURITY? - - -
+
+The program is designed for offline transactions. Users do security handshake from the handshake algo.
+
+### Why it’s secure (hard to fake or steal)
+- Both people must be active at the same exact time.  
+  You show code → friend types it → friend shows code → you type it.  
+  If someone is not there (or on phone with you right now), it can’t finish. No replay of old codes.
+- Codes are random + tied to you two + amount + minute.  
+  The magic “verify” string is built from:  
+  `your_code + their_code + your_username + their_username + amount + current_minute`  
+  Then SHA256 hash → 12 chars stored in /tmp.  
+  Both sides build the exact same seed because you exchange the missing parts (codes).  
+  If any part is wrong (fake code, wrong amount, wrong person, old time), the hashes don’t match → transaction fails and money rolls back.
+- No data leaves your laptop except what you say out loud.  
+  Fully air-gapped. Attacker would need to hear both codes live and know your usernames/amount to fake anything – impossible without being there.
+- Encrypted on disk.  
+  Balance, name, logs all Fernet/AES encrypted. Even if someone steals your laptop, without password = gibberish.
+- Temp files auto-clean.  
+  /tmp files deleted after success or fail. Reboot = gone.
+
+**Result:** More secure than giving cash (cash can be counterfeit – here codes can’t be without both agreeing live).
+
+### Why transactions are always correct (no mistakes, no lost tekoi)
+- Double confirmation built-in.
+- Step-by-step:  
+  Sender → types amount → random code A → tells receiver "type 4821"  
+  Receiver types 4821 → proves agreement → random code B → tells sender "now type 7394"  
+  Sender types 7394 → both compute same hash → check match → commit.
+- If anything wrong → automatic refund:  
+  Wrong code, different amount, clock drift, early close → sender gets money back.
+- Logs only written on success (encrypted files like jan-02-2026/jan022026trntionbob.enc).
+
+## Installation & First Run (Linux Mint 19 32-bit)
+
+```bash
+cd ~/Desktop
+mkdir tekoi && cd tekoi
+# Save tekoi.py here (full script provided separately)
+chmod +x tekoi.py
+pip3 install cryptography   # one-time
+./tekoi.py
